@@ -2,11 +2,13 @@
 
 package com.harris.popcorn;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +22,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
-
+//TODO ΝΑ ΒΑΛΩ ΜΥΝΗΜΑ ΕΑΝ ΠΑΕΙ ΝΑ ΠΑΡΕΙ ΚΕΝΑ ΟΝΟΜΑ ΚΑΙ ΔΙΕΥΘΥΝΣΗ
 public class Client {
     
     @Id
@@ -40,8 +42,8 @@ public class Client {
     @Column (name = "email" , nullable = false)
     private String email;
     
-    
-    
+//    @OneToMany
+//    private List <Movie>moviesToWatch;
  
     
 }

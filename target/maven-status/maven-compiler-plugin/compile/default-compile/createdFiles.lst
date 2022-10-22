@@ -1,7 +1,7 @@
-com\harris\popcorn\ClientRepository.class
-com\harris\popcorn\ClientController.class
 exception\ClientNotFoundException.class
 com\harris\popcorn\PopcornApplication.class
+com\popcorn\controller\ClientController.class
 com\harris\popcorn\Client.class
+com\harris\popcorn\ClientRepository.class
 com\harris\popcorn\ClientService.class
 com\harris\popcorn\ClientServiceImpl.class
