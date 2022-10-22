@@ -1,0 +1,33 @@
+<!DOCTYPE>
+<html  >
+<!--    xmlns:th="https://www.thymeleaf.org/"-->
+  <head> 
+    <title>Grades</title>
+    <!--<link th:href="@{/grades-stylesheet.css}" rel="stylesheet">-->
+  </head>
+  <body>
+
+    <div class="topnav">
+      <a th:href="@{/form}">Form</a>
+      <a th:href="@{/clients}">All Clients</a>
+    </div>
+
+    <div class= "container">
+      <h2 > Grades </h2>
+      <table id="table"> 
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Email</th>
+        </tr>
+        <tr th:each="client: ${clients}">
+          <td th:text="${client.name}"></td>
+          <td th:text="${client.address}"></td>
+          <td th:text="${client.email}"></td>
+          <td> <a role="button"  th:href="@{form/(id = ${client.id})}">Update</a> </td>
+        </tr>
+      </table>
+    </div>
+     
+  </body>
+</html>
