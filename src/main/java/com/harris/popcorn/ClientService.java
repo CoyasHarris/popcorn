@@ -17,6 +17,7 @@ public interface ClientService {
     public  Client getClient(Long id);
     public  Client saveClient(Client client);
     public List<Client> listAll();
+    void deleteClient(Long id);
     
     
 }
