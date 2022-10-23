@@ -22,7 +22,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
-//TODO ΝΑ ΒΑΛΩ ΜΥΝΗΜΑ ΕΑΝ ΠΑΕΙ ΝΑ ΠΑΡΕΙ ΚΕΝΑ ΟΝΟΜΑ ΚΑΙ ΔΙΕΥΘΥΝΣΗ
+
 public class Client {
     
     @Id
