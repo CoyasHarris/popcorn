@@ -1,11 +1,14 @@
 
 package com.harris.popcorn;
 
+import javafx.beans.binding.Binding;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -32,6 +35,7 @@ public class MovieController {
 
             if (movieServiceImpl.listAll().get(i).getId().equals(id)) {
                 model.addAttribute("movie", movieServiceImpl.getMovie(id));
+               
               } else {
                 model.addAttribute("movie", new Movie());
 }
@@ -40,17 +44,17 @@ public class MovieController {
     }
     
     
-    @PostMapping("/submit")
-    public String saveMovie(Model model, Movie movie) {
+    @PostMapping("/movie/submit")
+    public String saveMovie(Model model, Movie movie ) {
         movieServiceImpl.saveMovie(movie);
-        String message = "Succesfully submitted";
-        model.addAttribute("movie",movie);
-        return "redirect:/movies";
+//        String message = "Succesfully submitted";
+//        model.addAttribute("message",message);
+        return "redirect:/movie/movies";
     
 }
     
 
-@GetMapping("/movies")
+    @GetMapping("/movies")
     public String getMovies(Model model) {
         model.addAttribute("movies", movieServiceImpl.listAll());
         return "moviesList";
@@ -60,7 +64,7 @@ public class MovieController {
     @GetMapping("/delete")
     public String deleteMovie(@RequestParam  Long id)
     { movieServiceImpl.deleteMovie(id);
-        return "redirect:/movies";
+        return "redirect:/movie/movies";
     }
     
 }

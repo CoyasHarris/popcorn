@@ -1,7 +1,13 @@
 C:\Users\Harris\Documents\NetBeansProjects\popcorn\popcorn\src\main\java\com\harris\popcorn\PopcornApplication.java
 C:\Users\Harris\Documents\NetBeansProjects\popcorn\popcorn\src\main\java\exception\ClientNotFoundException.java
 C:\Users\Harris\Documents\NetBeansProjects\popcorn\popcorn\src\main\java\com\harris\popcorn\ClientRepository.java
-C:\Users\Harris\Documents\NetBeansProjects\popcorn\popcorn\src\main\java\com\popcorn\controller\ClientController.java
+C:\Users\Harris\Documents\NetBeansProjects\popcorn\popcorn\src\main\java\com\harris\popcorn\ClientServiceImpl.java
+C:\Users\Harris\Documents\NetBeansProjects\popcorn\popcorn\src\main\java\com\harris\popcorn\MovieService.java
+C:\Users\Harris\Documents\NetBeansProjects\popcorn\popcorn\src\main\java\com\harris\popcorn\Movie.java
+C:\Users\Harris\Documents\NetBeansProjects\popcorn\popcorn\src\main\java\com\harris\popcorn\ClientController.java
+C:\Users\Harris\Documents\NetBeansProjects\popcorn\popcorn\src\main\java\com\harris\popcorn\Constants.java
+C:\Users\Harris\Documents\NetBeansProjects\popcorn\popcorn\src\main\java\com\harris\popcorn\MovieController.java
 C:\Users\Harris\Documents\NetBeansProjects\popcorn\popcorn\src\main\java\com\harris\popcorn\Client.java
 C:\Users\Harris\Documents\NetBeansProjects\popcorn\popcorn\src\main\java\com\harris\popcorn\ClientService.java
-C:\Users\Harris\Documents\NetBeansProjects\popcorn\popcorn\src\main\java\com\harris\popcorn\ClientServiceImpl.java
+C:\Users\Harris\Documents\NetBeansProjects\popcorn\popcorn\src\main\java\com\harris\popcorn\MovieRepository.java
+C:\Users\Harris\Documents\NetBeansProjects\popcorn\popcorn\src\main\java\com\harris\popcorn\MovieServiceImpl.java

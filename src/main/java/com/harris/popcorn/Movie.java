@@ -1,13 +1,12 @@
 package com.harris.popcorn;
 
-import com.harris.popcorn.Rating;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -20,6 +19,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class Movie {
     
     @Id
@@ -53,7 +53,9 @@ public class Movie {
     @Column (name = "rating" , nullable = false)
     private double rating;
     
-    
+    @NonNull
+    @Column (name = "summary" , nullable = false)
+    private String summary;
     
     //TODO MAKE LIST OF actors
 //    private List<Actor> actors;

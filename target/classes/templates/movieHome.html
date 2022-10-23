@@ -11,7 +11,9 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>SEE ALL MOVIES</div>
+        <div>
+        <a th:href="@{movie/movies}" class= "btn btn-primary">SEE ALL MOVIES</a>
+        </div>
         <div>
         <a th:href="@{movie/addmovieform}" class= "btn btn-primary">ADD a MOVIE</a>
         </div>

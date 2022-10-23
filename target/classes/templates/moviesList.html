@@ -1,32 +1,40 @@
 <!DOCTYPE>
-<html  >
+<html>
   <head> 
-    <title>Grades</title>
-    <!--<link th:href="@{/grades-stylesheet.css}" rel="stylesheet">-->
+    <title>Movies</title>
+    <link th:href="@{/liststyle.css}" rel="stylesheet">
   </head>
   <body>
 
     <div class="topnav">
       <a th:href="@{/}">Home</a>
-      <a th:href="@{/form}">Add Client</a>
-      <a th:href="@{/clients}">All Clients</a>
+      <a th:href="@{/movie/addmovieform}">Add Movie</a>
     </div>
 
-    <div class= "container">
-      <h2 > Clients </h2>
-      <table id="table"> 
+    <div class="container">
+      <h2 > Movies </h2>
+      <table> 
+          <thead>
         <tr>
-          <th>Name</th>
-          <th>Address</th>
-          <th>Email</th>
+                      
+          <th>Title</th>
+          <th>Rating</th>
+          <th>Genre</th>
+          <th>Summary</th>
+          
         </tr>
-        <tr th:each="movie ${movies}">
+        </thead>
+        <tbody>
+        <tr th:each="movie :${movies}">
           <td th:text="${movie.title}"></td>
-          <td th:text="${movie.director}"></td>
           <td th:text="${movie.rating}"></td>
-<!--          <td> <a role="button"  th:href="@{form/(id = ${client.id})}">Update</a> </td>
-          <td> <a role="button"  th:href="@{delete/(id = ${client.id})}">Delete</a> </td>-->
+          <td th:text="${movie.genre}"></td>
+          <td th:text="${movie.summary}"></td>
+          
+          <td> <a role="button"  th:href="@{addmovieform/(id = ${movie.id})}">Update</a> </td>
+          <td> <a role="button"  th:href="@{delete/(id = ${movie.id})}">Delete</a> </td>
         </tr>
+        </tbody>
       </table>
     </div>
      

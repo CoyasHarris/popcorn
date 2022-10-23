@@ -9,7 +9,7 @@
   <body>
     <div class="topnav">
         <a th:href="@{/}">Home</a>
-      <a th:href="@{/}">Form</a>
+     
       <a th:href="@{/clients}">All Clients</a>
     </div>   
     <div class="login-box">
@@ -17,7 +17,9 @@
       
       <form method="post" th:object="${client}" th:action="@{/submit}"> 
         <div class="user-box"> 
-        <input type="text" placeholder="Name" th:field="*{name}">
+        <input type="text" placeholder="Name" th:field="*{name}" required="required" 
+                       oninvalid="this.setCustomValidity('Name must be filled')"
+                       oninput="setCustomValidity('')">>
         <label>Name</label>
       </div> 
         <div class="user-box">
@@ -25,13 +27,15 @@
         <label>Address</label>
       </div> 
         <div class="user-box">
-        <input type="text" placeholder="E-mail" th:field="*{email}">
+        <input type="text" placeholder="E-mail" th:field="*{email}" required="required" 
+                       oninvalid="this.setCustomValidity('E-mail must be filled')"
+                       oninput="setCustomValidity('')">>
         <label>E-mail</label>
       </div> 
         <input type="hidden" th:field="*{id}">
         <br><br>
         <a href="#">
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" >
  
           <span></span>
           <span></span>

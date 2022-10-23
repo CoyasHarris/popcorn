@@ -49,8 +49,8 @@ public class ClientController {
     @PostMapping("/submit")
     public String saveClient(Model model, Client client) {
         clientServiceImpl.saveClient(client);
-        String message = "Succesfully submitted";
-        model.addAttribute("message",message);
+//        String message = "Succesfully submitted";
+//        model.addAttribute("message",message);
         return "redirect:/clients";
 
     }
