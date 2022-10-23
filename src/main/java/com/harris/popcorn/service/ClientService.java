@@ -3,17 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.harris.popcorn;
+package com.harris.popcorn.service;
 
+import com.harris.popcorn.entity.Client;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
 
+
+
 @Service
-public interface MovieService {
+public interface ClientService {
     
-    public  Movie getMovie(Long id);
-    public  Movie saveMovie(Movie movie);
-    public List<Movie> listAll();
-    void deleteMovie(Long id);
+    public  Client getClient(Long id);
+    public  Client saveClient(Client client);
+    public List<Client> listAll();
+    void deleteClient(Long id);
+    
+    
 }

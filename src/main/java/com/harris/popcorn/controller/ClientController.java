@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.harris.popcorn;
+package com.harris.popcorn.controller;
 
-import com.harris.popcorn.Client;
-import com.harris.popcorn.ClientServiceImpl;
+import com.harris.popcorn.entity.Client;
+import com.harris.popcorn.entity.Client;
+import com.harris.popcorn.service.ClientServiceImpl;
+import com.harris.popcorn.service.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

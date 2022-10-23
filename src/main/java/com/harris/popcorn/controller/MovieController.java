@@ -1,6 +1,8 @@
 
-package com.harris.popcorn;
+package com.harris.popcorn.controller;
 
+import com.harris.popcorn.entity.Movie;
+import com.harris.popcorn.service.MovieServiceImpl;
 import javafx.beans.binding.Binding;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

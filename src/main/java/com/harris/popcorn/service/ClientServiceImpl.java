@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.harris.popcorn;
+package com.harris.popcorn.service;
 
+import com.harris.popcorn.entity.Client;
+import com.harris.popcorn.repository.ClientRepository;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

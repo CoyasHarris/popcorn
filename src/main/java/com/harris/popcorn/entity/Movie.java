@@ -1,4 +1,4 @@
-package com.harris.popcorn;
+package com.harris.popcorn.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

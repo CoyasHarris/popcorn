@@ -1,6 +1,6 @@
 
 
-package com.harris.popcorn;
+package com.harris.popcorn.entity;
 
 import java.util.List;
 import javax.persistence.Column;

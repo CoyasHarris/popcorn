@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.harris.popcorn;
+package com.harris.popcorn.repository;
 
+
+import com.harris.popcorn.entity.Client;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MovieRepository extends CrudRepository<Movie, Long>{
-    
+public interface ClientRepository extends CrudRepository<Client, Long>{
+
+
 }
+
