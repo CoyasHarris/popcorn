@@ -1,13 +1,3 @@
-com\harris\popcorn\MovieController.class
-com\harris\popcorn\MovieService.class
 com\harris\popcorn\Constants.class
 exception\ClientNotFoundException.class
-com\harris\popcorn\MovieRepository.class
 com\harris\popcorn\PopcornApplication.class
-com\harris\popcorn\Client.class
-com\harris\popcorn\Movie.class
-com\harris\popcorn\ClientRepository.class
-com\harris\popcorn\ClientController.class
-com\harris\popcorn\MovieServiceImpl.class
-com\harris\popcorn\ClientService.class
-com\harris\popcorn\ClientServiceImpl.class

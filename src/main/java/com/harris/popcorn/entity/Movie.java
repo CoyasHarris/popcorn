@@ -33,12 +33,12 @@ public class Movie {
     private String title;
     
     @NonNull
-    @Column (name = "xronia" , nullable = false)
-    private int xronia;
+    @Column (name = "year" , nullable = false)
+    private Integer year;
     
     @NonNull
     @Column (name = "duration" , nullable = false)
-    private int duration;
+    private Integer duration;
     
     @NonNull
     @Column (name = "genre" , nullable = false)
@@ -51,7 +51,7 @@ public class Movie {
     
     @NonNull
     @Column (name = "rating" , nullable = false)
-    private double rating;
+    private Double rating;
     
     @NonNull
     @Column (name = "summary" , nullable = false)

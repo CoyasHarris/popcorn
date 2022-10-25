@@ -19,19 +19,45 @@
                        oninvalid="this.setCustomValidity('Title must be filled')"
                        oninput="setCustomValidity('')">
                 <br>
-                <input type="text" placeholder="Xronia" th:field="*{xronia}">  
+                <input type="text" placeholder="Year" th:field="*{year}" required="required" 
+                       oninvalid="this.setCustomValidity('Year must be filled')"
+                       oninput="setCustomValidity('')">  
                 <br>
-                <input type="text" placeholder="Duration" th:field="*{duration}">
-                <br>
-                <input type="text" placeholder="Genre" th:field="*{genre}"required="required" 
-                       oninvalid="this.setCustomValidity('Genre must be filled')"
+                <input type="text" placeholder="Duration" th:field="*{duration}"
+                       required="required" 
+                       oninvalid="this.setCustomValidity('Duration must be filled')"
                        oninput="setCustomValidity('')">
                 <br>
-                <input type="text" placeholder="Director" th:field="*{director}">
+<!--                <input type="text" placeholder="Genre" th:field="*{genre}"required="required" 
+                       oninvalid="this.setCustomValidity('Genre must be filled')"
+                       oninput="setCustomValidity('')">-->
+                
+                <input th:list="genrecategories" placeholder="Genre" th:field="*{genre}"required="required" 
+                       oninvalid="this.setCustomValidity('Genre must be filled')"
+                       oninput="setCustomValidity('')">
+                 <datalist id="genrecategories">
+                    <option value="Horror">
+                    <option value="Thriller">
+                    <option value="Comedy">
+                    <option value="Drama">
+                    <option value="Action">
+                    <option value="Documentary">
+                    <option value="Romance">
+                        
+                </datalist>
+
                 <br>
-                <input type="text" placeholder="Rating" th:field="*{rating}">
+                <input type="text" placeholder="Director" th:field="*{director}"required="required" 
+                       oninvalid="this.setCustomValidity('Director must be filled')"
+                       oninput="setCustomValidity('')">
                 <br>
-                <input type="text" placeholder="Summary" th:field="*{summary}">
+                <input type="text" placeholder="Rating" th:field="*{rating}"required="required" 
+                       oninvalid="this.setCustomValidity('Rating must be filled')"
+                       oninput="setCustomValidity('')">
+                <br>
+                <h3>Summary</h3>
+
+                <textarea name="message" rows="10" cols="30" th:field="*{summary}">The cat was playing in the garden.</textarea>                
                 <input type="hidden" th:field="*{id}">
                 <br><br>
                 <input type="submit" value="Submit">
