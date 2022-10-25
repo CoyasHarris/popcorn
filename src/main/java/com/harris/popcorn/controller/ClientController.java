@@ -22,7 +22,12 @@ public class ClientController {
 
     
     
-    @GetMapping
+    @GetMapping()
+    public String showIntro() {
+        return "intro";
+    }
+    
+    @GetMapping("/home")
     public String showHome() {
         return "home";
     }
