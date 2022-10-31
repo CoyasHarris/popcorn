@@ -31,18 +31,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User saveUser(User user) {
+    public void saveUser(User user) {
+        //Encoding password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         //Adding User role by default
         Role role = roleRepository.findByName("ROLE_USER");
         if (role == null) {
             role = checkRoleExist();
-            
-           user.setRoles(Arrays.asList(role));
-            userRepository.save(user);
         }
-        return userRepository.save(user);
+        user.setRoles(Arrays.asList(role));
+        userRepository.save(user);
+
     }
 
     @Override

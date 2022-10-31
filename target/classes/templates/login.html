@@ -34,8 +34,19 @@
             <div th:if="${param.error}">
                 <div class="alert alert-danger">Invalid Email or Password</div>
             </div>
+<!--            <div th:if="${accountExists}" >
+                <div class="alert alert-danger" th:text="${accountExists}"></div>
+            
+            </div>-->
+            
+           
+           
             <div th:if="${param.logout}">
                 <div class="alert alert-success"> You have been logged out.</div>
+            </div>
+            <div th:if="${registerSuccess}" >
+                <div class="alert alert-success" th:text="${registerSuccess}"></div>
+            
             </div>
 
             <div class="card">

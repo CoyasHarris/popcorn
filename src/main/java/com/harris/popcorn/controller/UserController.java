@@ -53,19 +53,22 @@ public class UserController {
     public String saveUser(@Valid @ModelAttribute User user, BindingResult result, Model model) {
 
         String mail = user.getEmail();
-        System.out.println("TO MAIL EINAIIII" + mail);
 
         User existingUser = userServiceImpl.findUserByEmail(mail);
 
         if (existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()) {
+//              model.addAttribute("accountExists", "There is already an account registered with this email.Please Log In.");
             result.rejectValue("email", null, "There is already an account registered with the same email");
+                      
+
         }
         if (result.hasErrors()) {
             return "redirect:/login";
         }
+        model.addAttribute("registerSuccess", "Registered Successfully.Please Log In.");
         userServiceImpl.saveUser(user);
-
-        return "redirect:/users";
+        
+        return "login";
 
     }
 

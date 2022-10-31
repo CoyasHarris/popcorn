@@ -1,3 +1,4 @@
+com\harris\popcorn\controller\UserController.class
 com\harris\popcorn\Constants.class
 com\harris\popcorn\controller\MovieController.class
 com\harris\popcorn\service\MovieService.class
@@ -5,6 +6,7 @@ com\harris\popcorn\service\CustomUserDetailService.class
 com\harris\popcorn\entity\Role.class
 com\harris\popcorn\service\UserServiceImpl.class
 com\harris\popcorn\entity\Movie.class
+exception\ClientNotFoundException.class
 com\harris\popcorn\PopcornApplication.class
 com\harris\popcorn\repository\MovieRepository.class
 com\harris\popcorn\entity\User.class
