@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,9 +23,8 @@ import lombok.Setter;
 
 
 
-
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -31,14 +32,21 @@ import lombok.Setter;
 public class Role {
     
     
+    
+    
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     
     @Column(nullable = false,unique = true)
-    private String name;
-    
+    private  String name;
+
+      
     @ManyToMany (mappedBy = "roles")
     private List<User> users = new ArrayList<>();
+    
+  
+
+   
     
 }

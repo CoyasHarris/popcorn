@@ -13,5 +13,6 @@ com\harris\popcorn\entity\User.class
 com\harris\popcorn\repository\UserRepository.class
 com\harris\popcorn\service\MovieServiceImpl.class
 com\harris\popcorn\repository\RoleRepository.class
+com\harris\popcorn\CommandLineAppStartupRunner.class
 com\harris\popcorn\security\SecurityConfig.class
 com\harris\popcorn\service\UserService.class

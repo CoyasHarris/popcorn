@@ -1,8 +1,12 @@
 package com.harris.popcorn.controller;
 
+import com.harris.popcorn.entity.Role;
 import com.harris.popcorn.entity.User;
+import com.harris.popcorn.repository.RoleRepository;
 import com.harris.popcorn.repository.UserRepository;
+import com.harris.popcorn.service.RoleServiceImpl;
 import com.harris.popcorn.service.UserServiceImpl;
+import java.util.Arrays;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +26,8 @@ public class UserController {
     @Autowired
     private UserServiceImpl userServiceImpl;
     @Autowired
-    private UserRepository userRepository;
+    private RoleServiceImpl roleServiceImpl;
+  
 
     @GetMapping()
     public String showIntro() {
@@ -59,15 +64,15 @@ public class UserController {
         if (existingUser != null && existingUser.getEmail() != null && !existingUser.getEmail().isEmpty()) {
 //              model.addAttribute("accountExists", "There is already an account registered with this email.Please Log In.");
             result.rejectValue("email", null, "There is already an account registered with the same email");
-                      
-
         }
         if (result.hasErrors()) {
             return "redirect:/login";
         }
         model.addAttribute("registerSuccess", "Registered Successfully.Please Log In.");
+        Role role = roleServiceImpl.findByName("ROLE_USER");
+        user.setRoles(Arrays.asList(role));
         userServiceImpl.saveUser(user);
-        
+
         return "login";
 
     }

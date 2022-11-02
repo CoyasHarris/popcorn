@@ -77,28 +77,30 @@ public class SecurityConfig {
 
         return http.build();
     }
-
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails admin = User.builder()
-//                .username("admin")
-//                .password(passwordEncoder().encode("1234"))
-//                .roles("ADMIN")
-//                .build();
-//        
-//        UserDetails user = User.builder()
-//                .username("user")
-//                .password(passwordEncoder().encode("5678"))
-//                .roles("USER")
-//                .build();
-//        
-//        return new InMemoryUserDetailsManager(admin , user);
-//
-//    }
-
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-}
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        UserDetails admin = User.builder()
+//                .username("admin")
+//                .password("1234")
+//                .roles("ADMIN")
+//                .build();
+//        
+////        UserDetails user = User.builder()
+////                .username("user")
+////                .password(passwordEncoder().encode("5678"))
+////                .roles("USER")
+////                .build();
+////        
+//        return new InMemoryUserDetailsManager(admin);
+//
+    }
+
+
+    
+
+
