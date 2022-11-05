@@ -27,7 +27,6 @@ public class UserController {
     private UserServiceImpl userServiceImpl;
     @Autowired
     private RoleServiceImpl roleServiceImpl;
-  
 
     @GetMapping()
     public String showIntro() {
@@ -77,6 +76,11 @@ public class UserController {
 
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     @GetMapping("/users")
     public String getUsers(Model model) {
         model.addAttribute("users", userServiceImpl.listAll());
@@ -87,11 +91,6 @@ public class UserController {
     public String deleteUser(@RequestParam Long id) {
         userServiceImpl.deleteUser(id);
         return "redirect:/users";
-    }
-
-    @GetMapping("/login")
-    public String login() {
-        return "login";
     }
 
 }
