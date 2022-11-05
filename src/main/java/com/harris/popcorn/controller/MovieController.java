@@ -1,8 +1,8 @@
-
 package com.harris.popcorn.controller;
 
 import com.harris.popcorn.entity.Movie;
 import com.harris.popcorn.service.MovieServiceImpl;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,22 +12,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-
 @Controller
 @RequestMapping("/movie")
 public class MovieController {
-    
-    
+
     @Autowired
     MovieServiceImpl movieServiceImpl;
-    
+
     @GetMapping
     public String showHome() {
         return "movieHome";
     }
-    
-    
+
     @GetMapping("/addmovieform")
     public String showForm(Model model, @RequestParam(required = false) Long id, Movie movie) {
 
@@ -35,38 +31,37 @@ public class MovieController {
 
             if (movieServiceImpl.listAll().get(i).getId().equals(id)) {
                 model.addAttribute("movie", movieServiceImpl.getMovie(id));
-               
-              } else {
+
+            } else {
                 model.addAttribute("movie", new Movie());
-}
+            }
         }
-          return "addMovieForm";
+        return "addMovieForm";
     }
-    
-    
+
     @PostMapping("/movie/submit")
-    public String saveMovie(Model model, Movie movie ) {
+    public String saveMovie(Model model, Movie movie) {
         movieServiceImpl.saveMovie(movie);
 //        String message = "Succesfully submitted";
 //        model.addAttribute("message",message);
         return "redirect:/movie/movies";
-    
-}
-    
+
+    }
 
     @GetMapping("/movies")
-    public String getMovies(Model model) {
+    public String getMovies(HttpServletRequest request, Model model) {
+        if (request.isUserInRole("ROLE_ADMIN")) {
+            model.addAttribute("movies", movieServiceImpl.listAll());
+            return "moviesListAdmin";
+        }
         model.addAttribute("movies", movieServiceImpl.listAll());
-        return "moviesList";
+        return "moviesListUser";
     }
-    
-    
+
     @GetMapping("/delete")
-    public String deleteMovie(@RequestParam  Long id)
-    { movieServiceImpl.deleteMovie(id);
+    public String deleteMovie(@RequestParam Long id) {
+        movieServiceImpl.deleteMovie(id);
         return "redirect:/movie/movies";
     }
-    
-}
-    
 
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head> 
+        <title>Movies</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" 
+              rel="stylesheet" 
+              integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" 
+              crossorigin="anonymous">
+        
+    </head>
+    <body class="bg-image"th:style="'background-size:cover ;background-image: url(/cinema-lighter.jpg)'">
+        
+    </body><nav class="navbar  ">
+<div class="container-lg">
+    <div class ="btn-group ">
+            
+        <a class="btn btn-primary btn-lg" th:href="@{/home}">Home</a>
+        
+        <!--<a class="btn btn-secondary btn-lg" th:href="@{/movie/movies}">Movies</a>-->
+        <a class="btn btn-secondary btn-lg" th:href="@{/users}">Users</a>
+        
+        <a class="btn btn-danger btn-lg"  th:href="@{/logout}">Logout</a>
+</div>
+</div>
+</nav>    
+<!--        <div class="topnav">
+                  <a th:href="@{/home}">Home</a>
+                  <a th:href="@{/movie/addmovieform}">Add Movie</a>
+            <a class="nav-link active" aria-current="page" th:href="@{/home}">Home</a>
+            <a class="nav-link active" aria-current="page" th:href="@{/movie/addmovieform}">Add Movie</a>
+            <a class="nav-link active" aria-current="page" th:href="@{/form}">Add User</a>
+            <a class="nav-link active" aria-current="page" th:href="@{/logout}">Log-out</a>
+
+
+        </div>-->
+
+        <div class="container-lg my-5 lead text-center">
+            <h2 > Movies </h2>
+
+            <input id="myInput" type="text" placeholder="Search..">
+            <div class="table-responsive">
+            <table class="container-lg my-5 lead text-center table table-dark table-striped"> 
+                <thead class='table-dark'>
+                    <tr>
+
+                        <th>Title</th>
+                        <th>Rating</th>
+                        <th>Genre</th>
+                        <th>Summary</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+                    <tr th:each="movie :${movies}">
+                        <td th:text="${movie.title}"></td>
+                        <td th:text="${movie.rating}"></td>
+                        <td th:text="${movie.genre}"></td>
+                        <td th:text="${movie.summary}"></td>
+
+                        <td> <a role="button"  th:href="@{addmovieform/(id = ${movie.id})}">Update</a> </td>
+                        <td> <a  role="button"  th:href="@{delete/(id = ${movie.id})}">Delete</a> </td> 
+                        <!--<div sec:authorize="hasRole('ROLE_ADMIN')">Text visible to admin.</div>-->
+                        <!--          <tr th:each="movie :${movies}">
+                                  <td th:text="${movie.title}"></td>
+                                  <div th:object="${loggedInUser}"
+                                      th:field="*{name}">
+                                      
+                                  </div>-->
+
+                    </tr>
+                </tbody>
+            </table>
+                </div>
+            <a class="btn btn-outline-info btn-lg" th:href="@{/movie/addmovieform}">Add Movie</a>
+        </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script th:src= "@{/searchbar.js}"></script>
+        <footer class="bg-info text-center text-lg-start fixed-bottom">
+
+      <!--Grid column-->
+
+      
+      
+
+
+  <!-- Copyright -->
+  <div class="text-center p-1" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2022 Copyright:
+    <a class="text-dark" href="https://mdbootstrap.com/">Coyas Harris</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+    </body>
+</html>
