@@ -66,6 +66,8 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")})
      @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
      private List<Role> roles = new ArrayList<>();
+
+   
     
     
 

@@ -18,11 +18,13 @@
           <th>Name</th>
           <th>Address</th>
           <th>Email</th>
+          <th>Role</th>
         </tr>
         <tr th:each="user: ${users}">
           <td th:text="${user.name}"></td>
           <td th:text="${user.address}"></td>
           <td th:text="${user.email}"></td>
+          <td th:text="${user.roles}"></td>
           <td> <a role="button"  th:href="@{form/(id = ${user.id})}">Update</a> </td>
           <td> <a role="button"  th:href="@{delete/(id = ${user.id})}">Delete</a> </td>
         </tr>
