@@ -52,4 +52,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
+    public boolean passwordCorrect(String givenPassword, String encodedPassword) {
+        boolean correct;
+        correct = passwordEncoder.matches(givenPassword, encodedPassword);
+        return correct;
+    }
 }

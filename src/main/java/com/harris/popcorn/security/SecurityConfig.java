@@ -5,6 +5,8 @@
  */
 package com.harris.popcorn.security;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 @Configuration
 @EnableWebSecurity
@@ -23,37 +26,28 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                    .authorizeRequests()
-                
+                .authorizeRequests()
                 .antMatchers("/form/**").permitAll()
                 .antMatchers("/home").permitAll()
+                .antMatchers("/updateName").permitAll()
                 .antMatchers("/users").hasRole("ADMIN")
                 .antMatchers("/movie/movies").permitAll()
                 .antMatchers("/movie/addmovieform").hasRole("ADMIN")
                 .antMatchers("/resources/**").permitAll().anyRequest().permitAll()
-                .and ()
+                .and()
                 .formLogin(
-                        form ->form
-                            .loginPage("/login")
-                            .loginProcessingUrl("/login")
-                            .defaultSuccessUrl("/default")
-                            .permitAll()
-                 
-                
+                        form -> form
+                                .loginPage("/login")
+                                .loginProcessingUrl("/login")
+                                .defaultSuccessUrl("/default")
+                                .permitAll()
                 )
                 .logout(
                         logout -> logout
                                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                                 .permitAll()
-
-                
                 );
-                
-                
-                
-                
-                
-                
+
 //                .authorizeHttpRequests((requests) -> requests
 //				.antMatchers("/").permitAll()
 //				.anyRequest().authenticated()
@@ -65,22 +59,35 @@ public class SecurityConfig {
 //			.logout((logout) -> logout.permitAll());
 //                
 //                
-                
-                
 //                .authorizeRequests()
 //                .anyRequest().authenticated()
 //                .and()
 //                .httpBasic()
 //                .and()
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
         return http.build();
     }
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    
+    public void addResourceHandlers(ResourceHandlerRegistry registry){
+    exposeDirectory("movie-photos",registry);
+    }
+    
+    private void exposeDirectory(String dirName,ResourceHandlerRegistry registry){
+    Path uploadDir = Paths.get(dirName);
+    String uploadPath =uploadDir.toFile().getAbsolutePath();
+    if(dirName.startsWith("../")) dirName= dirName.replace("../", "");
+    registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/" + uploadPath + "/");
+    
+    }
+    
+    
+    
 //    @Bean
 //    public UserDetailsService userDetailsService() {
 //        UserDetails admin = User.builder()
@@ -97,9 +104,4 @@ public class SecurityConfig {
 ////        
 //        return new InMemoryUserDetailsManager(admin);
 //
-    }
-
-
-    
-
-
+}

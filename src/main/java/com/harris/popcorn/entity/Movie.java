@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,8 +27,7 @@ public class Movie {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    
-    
+
     @NonNull
     @Column (name = "title" , nullable = false)
     private String title;
@@ -57,6 +57,20 @@ public class Movie {
     @Column (name = "summary" , nullable = false)
     private String summary;
     
+    @Column(length = 64 ,nullable = true )
+    private String photos;
+    
+    @Transient
+    public String getPhotosImagePath(){
+    if (photos == null || id == null)
+        return null;
+    return "/movie-photos/" + id + "/" + photos;
+    }
+    
+    
+    }
+    
+    
     //TODO MAKE LIST OF actors
 //    private List<Actor> actors;
     
@@ -68,4 +82,4 @@ public class Movie {
     
     
     
-}
+

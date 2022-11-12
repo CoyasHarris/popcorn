@@ -3,17 +3,12 @@
   <head>
     <link rel="stylesheet" href="mystyle.css">
     <title>Form</title>
-<!--    <link th:href="@{/form-stylesheet.css}" rel="stylesheet">-->
   </head>    
  
-  <body>
-    <div class="topnav">
-        <a th:href="@{/home}">Home</a>
-     
-      <a th:href="@{/users}">All Users</a>
-    </div>   
+  <body class="bg-image"th:style="'background-size:cover ;background-image: url(/cinema-lighter.jpg)'">
+   
     <div class="login-box">
-      <h2> Adding Client </h2>
+      <h2> Register </h2>
       
       <form method="post" th:object="${user}" th:action="@{/submit}"> 
         <div class="user-box"> 
@@ -23,7 +18,7 @@
         <label>Name</label>
       </div> 
         <div class="user-box">
-        <input type="text" placeholder="Address" th:field="*{address}">  
+        <input type="text" placeholder="Address" th:field="*{address}" required="required">  
         <label>Address</label>
       </div> 
         <div class="user-box">
@@ -40,14 +35,14 @@
       </div> 
         <input type="hidden" th:field="*{id}">
         <br><br>
-        <a href="#">
-            <input type="submit" value=" Push me ">
+        <a href="#" >
+            <input href= "#"type="submit" >
  
           <span></span>
           <span></span>
           <span></span>
           <span></span>
-          Submit
+          
         </a>
       </form>
     </div>
