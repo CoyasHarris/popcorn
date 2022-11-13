@@ -55,8 +55,7 @@ public class MovieController {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         movie.setPhotos(fileName);
         movieServiceImpl.saveMovie(movie);
-        String message = "Succesfully submitted";
-        rm.addAttribute("message",message);
+        rm.addAttribute("movieAdded","Succesfully submitted");
         String uploadDir= "movie-photos/" + movie.getId();
         FileUploadUtil.saveFile(uploadDir, fileName,multipartFile);
         return "redirect:/movie/movies";

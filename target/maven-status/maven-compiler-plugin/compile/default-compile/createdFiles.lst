@@ -1,4 +1,5 @@
 com\harris\popcorn\controller\UserController.class
+com\harris\popcorn\security\MvcConfig.class
 com\harris\popcorn\Constants.class
 com\harris\popcorn\controller\MovieController.class
 com\harris\popcorn\service\RoleServiceImpl.class

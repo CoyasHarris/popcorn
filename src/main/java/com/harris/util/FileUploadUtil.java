@@ -2,12 +2,14 @@
 package com.harris.util;
 
 import java.io.*;
-import java.nio.file.*;;
+import java.nio.file.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
 public class FileUploadUtil {
-
+//this utility class is only responsible for creating the directory if not exists, 
+//and save the uploaded file from MultipartFile object to a file in the file system.
+    
     public static void saveFile(String uploadDir, String fileName,MultipartFile multipartFile) throws IOException {
         
         Path uploadPath = Paths.get(uploadDir);

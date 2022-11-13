@@ -12,15 +12,18 @@
 
     <body class="bg-image"th:style="'background-size:cover ;background-image: url(/cinema-lighter.jpg)'">
 
-        <nav class="navbar  ">
+        <nav class="navbar ">
             <div class="container-lg">
                 <div class ="btn-group ">
 
                     <a class="btn btn-primary btn-lg" th:href="@{/users}">My Watchlist</a>
                     <a class="btn btn-danger btn-lg"  th:href="@{/logout}">Logout</a>
-                    <a href="#sidebarend" class=" btn btn-outline-danger my-2 my-lg-0" data-bs-toggle="offcanvas" role="button" aria-controls="sidebar">
+                    
+                    <a href="#sidebarend" class=" btn btn-outline-info my-2 my-lg-0" data-bs-toggle="offcanvas" role="button" aria-controls="sidebar">
                         User Details
                     </a> 
+                    
+                    
 
 
                 </div>
@@ -53,7 +56,7 @@
                 <table class="container-lg my-5 lead text-center table table-dark table-striped"> 
                     <thead class='table-dark'>
                         <tr>
-
+                            <th>Cover</th>
                             <th>Title</th>
                             <th>Rating</th>
                             <th>Genre</th>
@@ -66,6 +69,7 @@
                     </thead>
                     <tbody id="myTable">
                         <tr th:each="movie :${movies}">
+                            <td>  <img th:src = "@{${movie.photosImagePath}}" width="40" height="50"></td>                        
                             <td th:text="${movie.title}"></td>
                             <td th:text="${movie.rating}"></td>
                             <td th:text="${movie.genre}"></td>
@@ -110,7 +114,7 @@
                 </p>
             </div>
         </div>
-        <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="sidebarend" aria-labelledby="sidebar-label">
+        <div class="offcanvas offcanvas-end " data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="sidebarend" aria-labelledby="sidebar-label">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="sidebar-label">User Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
