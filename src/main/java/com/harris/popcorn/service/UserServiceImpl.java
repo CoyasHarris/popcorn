@@ -4,9 +4,11 @@ import com.harris.popcorn.entity.Role;
 import com.harris.popcorn.entity.User;
 import com.harris.popcorn.repository.RoleRepository;
 import com.harris.popcorn.repository.UserRepository;
+import exception.UserNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +54,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
 
+    
+    static User unwrapUser (Optional<User> entity, Long id)
+    {if(entity.isPresent())return entity.get();
+    else throw new UserNotFoundException(id);
+        
+    }
+            
+            
+            
     public boolean passwordCorrect(String givenPassword, String encodedPassword) {
         boolean correct;
         correct = passwordEncoder.matches(givenPassword, encodedPassword);

@@ -15,4 +15,5 @@ public interface MovieService {
     public  Movie saveMovie(Movie movie);
     public List<Movie> listAll();
     void deleteMovie(Long id);
+    public Movie addToWatchlist(Long user_id , Long movie_id);
 }

@@ -1,10 +1,13 @@
 package com.harris.popcorn.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import lombok.AllArgsConstructor;
@@ -60,12 +63,19 @@ public class Movie {
     @Column(length = 64 ,nullable = true )
     private String photos;
     
+    //WATCHLIST FUNCTIONALITY
+    @ManyToMany (mappedBy = "movie")
+    private List<User> users = new ArrayList<>();
+
+    
     @Transient
     public String getPhotosImagePath(){
     if (photos == null || id == null)
         return null;
     return "/movie-photos/" + id + "/" + photos;
     }
+    
+    
     
     
     }

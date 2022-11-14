@@ -8,7 +8,7 @@ com\harris\popcorn\service\CustomUserDetailService.class
 com\harris\popcorn\entity\Role.class
 com\harris\popcorn\service\UserServiceImpl.class
 com\harris\popcorn\entity\Movie.class
-exception\ClientNotFoundException.class
+exception\UserNotFoundException.class
 com\harris\popcorn\controller\DefaultController.class
 com\harris\popcorn\PopcornApplication.class
 com\harris\popcorn\repository\MovieRepository.class

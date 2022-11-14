@@ -28,7 +28,7 @@ public class MovieController {
 
     @Autowired
     UserServiceImpl userServiceImpl;
-    
+
     @GetMapping
     public String showHome() {
         return "movieHome";
@@ -50,29 +50,29 @@ public class MovieController {
     }
 
     @PostMapping("/movie/submit")
-    public String saveMovie( @RequestParam("image") MultipartFile multipartFile ,Model model, Movie movie ,RedirectAttributes rm) throws IOException {
-        
+    public String saveMovie(@RequestParam("image") MultipartFile multipartFile, Model model, Movie movie, RedirectAttributes rm) throws IOException {
+
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         movie.setPhotos(fileName);
         movieServiceImpl.saveMovie(movie);
-        rm.addAttribute("movieAdded","Succesfully submitted");
-        String uploadDir= "movie-photos/" + movie.getId();
-        FileUploadUtil.saveFile(uploadDir, fileName,multipartFile);
+        rm.addAttribute("movieAdded", "Succesfully submitted");
+        String uploadDir = "movie-photos/" + movie.getId();
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         return "redirect:/movie/movies";
 
     }
 
     @GetMapping("/movies")
-    public String getMovies(HttpServletRequest request, Model model ,@RequestParam(required = false) Long id, User user) {
+    public String getMovies(HttpServletRequest request, Model model, @RequestParam(required = false) Long id, User user) {
         if (request.isUserInRole("ROLE_ADMIN")) {
-         model.addAttribute("movies", movieServiceImpl.listAll());
+            model.addAttribute("movies", movieServiceImpl.listAll());
             return "moviesListAdmin";
         }
         String activeUserMail = request.getUserPrincipal().getName();
-        User activeUser= userServiceImpl.findUserByEmail(activeUserMail);
+        User activeUser = userServiceImpl.findUserByEmail(activeUserMail);
         model.addAttribute("activeUser", activeUser);
         model.addAttribute("movies", movieServiceImpl.listAll());
-       
+
         return "moviesListUser";
     }
 
@@ -81,7 +81,14 @@ public class MovieController {
         movieServiceImpl.deleteMovie(id);
         return "redirect:/movie/movies";
     }
-    
-    
 
+
+     
+    @RequestMapping("/addtowatchlist")
+    public String addToWatchList(@RequestParam(required = true) Long movie_id, @RequestParam(required = true) Long user_id, Model model) {
+        System.out.println("MOVIEID ="  + movie_id + "USERID = " +user_id);
+        
+        movieServiceImpl.addToWatchlist(movie_id, user_id);
+        return "redirect:/movie/movies";
+    }
 }

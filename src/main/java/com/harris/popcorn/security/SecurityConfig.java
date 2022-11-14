@@ -33,6 +33,7 @@ public class SecurityConfig {
                 .antMatchers("/users").hasRole("ADMIN")
                 .antMatchers("/movie/movies").permitAll()
                 .antMatchers("/movie/addmovieform").hasRole("ADMIN")
+                .antMatchers("/movie/addtowatchlist").hasRole("USER")
                 .antMatchers("/resources/**").permitAll().anyRequest().permitAll()
                 .and()
                 .formLogin(

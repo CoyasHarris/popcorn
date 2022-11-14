@@ -1,5 +1,3 @@
-
-
 package com.harris.popcorn.entity;
 
 import java.util.ArrayList;
@@ -24,63 +22,57 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
-
 @Getter
 @Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table (name = "users")
+@Table(name = "users")
 public class User {
-    
 
-     
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    
+
     @NonNull
-    @Column (name = "name" , nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
-    
+
     @NonNull
-    @Column (name = "address" , nullable = false)
+    @Column(name = "address", nullable = false)
     private String address;
-    
+
     @NonNull
-    @Column (name = "email" , nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
-    
+
     @NonNull
-    @Column (name = "password" , nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
+
+    //WATCHLIST FUNCTIONALITY
+    @ManyToMany
+    @JoinTable(
+            name = "users_watchlist_movies",
+            joinColumns = {
+                @JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "movie_id", referencedColumnName = "id")})
+    private List<Movie> movie = new ArrayList<>();
+
     
-     
     
-    @JoinTable (
+    @JoinTable(
             name = "users_roles",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "id")})
-     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
-     private List<Role> roles = new ArrayList<>();
+            joinColumns = {
+                @JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "role_id", referencedColumnName = "id")})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    private List<Role> roles = new ArrayList<>();
 
-   
-    
-    
+}
 
-    }
-    
-    
-    
 
-  
-
-    
-    
-//    @OneToMany
-//    private List <Movie>moviesToWatch;
-
-    

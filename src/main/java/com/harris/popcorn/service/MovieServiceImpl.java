@@ -3,8 +3,12 @@
 package com.harris.popcorn.service;
 
 import com.harris.popcorn.entity.Movie;
+import com.harris.popcorn.entity.User;
 import com.harris.popcorn.repository.MovieRepository;
+import com.harris.popcorn.repository.UserRepository;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,8 @@ public class MovieServiceImpl implements MovieService {
 
     @Autowired
     MovieRepository movieRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public Movie getMovie(Long id) {
@@ -37,5 +43,26 @@ public class MovieServiceImpl implements MovieService {
     public void deleteMovie(Long id) {
             movieRepository.deleteById(id);   
     }
+//
+//    @Override
+//    public void addToWatchlist(Long, Movie movie) {
+//        
+//        Optional<Movie> addedMovie = movieRepository.findById(movie.getId());
+//        Optional<User> activeUser = userRepository.findById(user.getId());
+//        user.setWatchListMovies(Arrays.asList(movie));
+//        
+//    }
+
+    @Override
+    public Movie addToWatchlist(Long movie_id , Long user_id) {
+        Movie movie = getMovie(movie_id);
+        Optional<User> activeUser = userRepository.findById(user_id);    
+        User unwrappedUser = UserServiceImpl.unwrapUser(activeUser, user_id);
+        movie.getUsers().add(unwrappedUser);
+        
+        return movieRepository.save(movie);
+    }
+    
+   
 
 }
