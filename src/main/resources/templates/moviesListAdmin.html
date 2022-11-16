@@ -30,6 +30,16 @@
                 <div class="alert alert-success" th:text="${movieAdded}"></div>
 
             </div>
+            <div th:if="${movieUpdated}" >
+                <div class="alert alert-success" th:text="${movieUpdated}"></div>
+            
+            </div>
+            <div th:if="${movieDeleted}" >
+                <div class="alert alert-danger" th:text="${movieDeleted}"></div>
+            
+            </div>
+            
+            
             <input id="myInput" type="text" placeholder="Search..">
             <div class="table-responsive">
                 <table class="container-lg my-5 lead text-center table table-dark table-striped"> 
@@ -55,7 +65,7 @@
                             <td th:text="${movie.genre}"></td>
                             <td th:text="${movie.summary}"></td>
 
-                            <td> <a role="button"  th:href="@{addmovieform/(id = ${movie.id})}">Update</a> </td>
+                            <td> <a role="button"  th:href="@{updateMovie/(id = ${movie.id})}">Update</a> </td>
                             <td> <a  role="button"  th:href="@{delete/(id = ${movie.id})}">Delete</a> </td> 
                             <!--<div sec:authorize="hasRole('ROLE_ADMIN')">Text visible to admin.</div>-->
                             <!--          <tr th:each="movie :${movies}">

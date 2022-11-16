@@ -53,7 +53,7 @@ public class User {
     private String password;
 
     //WATCHLIST FUNCTIONALITY
-    @ManyToMany
+    @ManyToMany (cascade = CascadeType.MERGE)
     @JoinTable(
             name = "users_watchlist_movies",
             joinColumns = {

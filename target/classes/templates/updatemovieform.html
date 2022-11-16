@@ -30,7 +30,7 @@
                 <br>
                 <h2 class="fw-bold "> Add Movie </h2>
 
-                <form method="post" th:object="${movie}" th:action="@{movie/submit}" enctype="multipart/form-data"> 
+                <form method="post" th:object="${movie}" th:action="@{/movie/update}" enctype="multipart/form-data"> 
 
                     <input class="rounded-pill border border-3" type="text" placeholder="Title" th:field="*{title}" required="required" 
                            oninvalid="this.setCustomValidity('Title must be filled')"
@@ -108,7 +108,6 @@
 
     </body>
 </html>
-
 
 
 

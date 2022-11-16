@@ -17,13 +17,14 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Table (name="movie")
+
 @Getter
 @Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table (name="movie")
 public class Movie {
     
     @Id

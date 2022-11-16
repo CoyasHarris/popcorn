@@ -81,11 +81,11 @@
                                
                         <td> <a role="button" class="btn btn-success" th:href="@{addtowatchlist/(movie_id=${movie.id},user_id=${activeUser.id})}">Add to WatchList</a> </td>
 <!--                            2OS TROPOS
-                           <form method="post"  th:action="@{addtowatchlist/(movie_id=${movie.id},user_id=${activeUser.id})}">
+-->                           <form method="post" th:object="${movie}" th:action="@{addtowatchlist/(movie_id=${movie.id},user_id=${activeUser.id})}">
                                
                             
                               <input type="submit" ></a>  
-                        </form> -->
+                        </form> 
 <!--                            <div th:object = "${activeUser}" class="box">
                              <div th:text = "*{id}" class="box">-->
                                 

@@ -23,9 +23,10 @@
 </nav> 
    
     <div class="container-lg my-5 lead text-center">
-        <input id="myInput" type="text" placeholder="Search..">
+        
       <h2 > Users </h2>
       <div class="table-responsive">
+          <input id="myInput" type="text" placeholder="Search..">
       <table class="container-lg my-5 lead text-center table table-dark table-striped"> 
           <thead class='table-dark'>
         <tr>
@@ -33,7 +34,6 @@
           <th>Address</th>
           <th>Email</th>
           <th>Role</th>
-          <th>Update</th>
           <th>Delete</th>
         </tr>
         </thead>
@@ -44,7 +44,6 @@
           <td th:text="${user.address}"></td>
           <td th:text="${user.email}"></td>
           <td th:text="${user.roles}"></td>
-          <td> <a role="button"  th:href="@{form/(id = ${user.id})}">Update</a> </td>
           <td> <a role="button"  th:href="@{delete/(id = ${user.id})}">Delete</a> </td>
         </tr>
         </tbody>

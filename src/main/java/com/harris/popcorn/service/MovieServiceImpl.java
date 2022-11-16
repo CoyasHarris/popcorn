@@ -59,7 +59,8 @@ public class MovieServiceImpl implements MovieService {
         Optional<User> activeUser = userRepository.findById(user_id);    
         User unwrappedUser = UserServiceImpl.unwrapUser(activeUser, user_id);
         movie.getUsers().add(unwrappedUser);
-        
+        System.out.println(movie.getTitle());
+        System.out.println(unwrappedUser.getName());
         return movieRepository.save(movie);
     }
     
