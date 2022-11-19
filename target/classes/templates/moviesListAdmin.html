@@ -6,6 +6,7 @@
               rel="stylesheet" 
               integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" 
               crossorigin="anonymous">
+        <link th:href="@{/movieList.css}" rel="stylesheet" >
 
     </head>
     <body class="bg-image"th:style="'background-size:cover ;background-image: url(/cinema-lighter.jpg)'">
@@ -41,7 +42,7 @@
             
             
             <input id="myInput" type="text" placeholder="Search..">
-            <div class="table-responsive">
+            <div id="movie-table" class="table-responsive">
                 <table class="container-lg my-5 lead text-center table table-dark table-striped"> 
                     <thead class='table-dark'>
                         <tr>

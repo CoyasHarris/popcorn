@@ -37,6 +37,8 @@ public class MovieController {
     @GetMapping("/addmovieform")
     public String showForm(Model model, Movie movie) {
         model.addAttribute("movie", new Movie());
+        System.out.println("ena ena ena TO MOVIE ID EINAI TO " + movie.getId());
+
         return "addmovieform";
     }
 
@@ -44,9 +46,9 @@ public class MovieController {
     public String saveMovie(@RequestParam("image") MultipartFile multipartFile, Model model, Movie movie, RedirectAttributes rm) throws IOException {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         movie.setPhotos(fileName);
+        movieServiceImpl.saveMovie(movie);
         String uploadDir = "movie-photos/" + movie.getId();
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        movieServiceImpl.saveMovie(movie);
         rm.addFlashAttribute("movieAdded", "Movie successfully submitted");
         return "redirect:/movie/movies";
 
@@ -67,17 +69,17 @@ public class MovieController {
     }
 
     @GetMapping("/delete")
-    public String deleteMovie(@RequestParam Long id ,RedirectAttributes rm) {
+    public String deleteMovie(@RequestParam Long id, RedirectAttributes rm) {
         movieServiceImpl.deleteMovie(id);
-        rm.addFlashAttribute("movieDeleted","Movie successfully Deleted");
+        rm.addFlashAttribute("movieDeleted", "Movie successfully Deleted");
         return "redirect:/movie/movies";
     }
 
     @GetMapping("/updateMovie")
     public String updateMovie(@RequestParam(required = true) Long id, Movie movie, Model model) {
         for (int i = 0; i < movieServiceImpl.listAll().size(); i++) {
-             movieServiceImpl.listAll().get(i).getId().equals(id);
-             model.addAttribute("movie", movieServiceImpl.getMovie(id));
+            movieServiceImpl.listAll().get(i).getId().equals(id);
+            model.addAttribute("movie", movieServiceImpl.getMovie(id));
 
         }
         return "updatemovieform";
@@ -87,7 +89,7 @@ public class MovieController {
     public String updateMovieFields(@RequestParam(required = true) Long id, Movie movie, RedirectAttributes rm) {
 
         Movie updatedMovie = movieServiceImpl.getMovie(id);
-      
+
         updatedMovie.setTitle(movie.getTitle());
         updatedMovie.setYear(movie.getYear());
         updatedMovie.setDuration(movie.getDuration());
@@ -100,13 +102,26 @@ public class MovieController {
         return "redirect:/movie/movies";
     }
 
-    
-    
-    @PostMapping("/addtowatchlist")
-    public String addToWatchList(@RequestParam(required = true) Long movie_id, @RequestParam(required = true) Long user_id) {
-        System.out.println("MOVIEID =" + movie_id + "USERID = " + user_id);
+    @RequestMapping("/addtowatchlist")
+    public String addToWatchList(@RequestParam(required = true) Long movie_id, @RequestParam(required = true) Long user_id, RedirectAttributes rm) {
 
+        for (int i = 0; i < movieServiceImpl.getMovie(movie_id).getUsers().size(); i++) {
+            if (movieServiceImpl.getMovie(movie_id).getUsers().get(i).getId().equals(user_id)) {
+            }
+            rm.addFlashAttribute("allreadyAdded", "Movie is Allready in your Watchlist");
+            return "redirect:/movie/movies";
+        }
         movieServiceImpl.addToWatchlist(movie_id, user_id);
+        rm.addFlashAttribute("addedToWatchlist", "Movie has been Added to your Watchlist");
         return "redirect:/movie/movies";
+    }
+
+    @GetMapping("/getByGenre")
+    public String getMoviesByGenre(Model model, @RequestParam(required = false) String movie_genre) {
+
+        System.out.println("EIMAI O CONTROLLER KAI TO MOVIE GENRE EINAI" + movie_genre);
+        movieServiceImpl.listByGenre(movie_genre);
+        model.addAttribute("moviesByGenre", movieServiceImpl.listByGenre(movie_genre));
+        return "moviesByGenre";
     }
 }

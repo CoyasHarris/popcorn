@@ -53,16 +53,17 @@ public class User {
     private String password;
 
     //WATCHLIST FUNCTIONALITY
-    @ManyToMany (cascade = CascadeType.MERGE)
+    
     @JoinTable(
             name = "users_watchlist_movies",
             joinColumns = {
                 @JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "movie_id", referencedColumnName = "id")})
+    @ManyToMany (fetch = FetchType.LAZY ,cascade = CascadeType.MERGE)
     private List<Movie> movie = new ArrayList<>();
 
-    
+     
     
     @JoinTable(
             name = "users_roles",

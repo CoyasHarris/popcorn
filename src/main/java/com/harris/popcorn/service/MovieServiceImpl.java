@@ -6,6 +6,7 @@ import com.harris.popcorn.entity.Movie;
 import com.harris.popcorn.entity.User;
 import com.harris.popcorn.repository.MovieRepository;
 import com.harris.popcorn.repository.UserRepository;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -40,18 +41,16 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public List<Movie> listByGenre(String movie_genre) {
+                System.out.println("EIMAI O SERVICE IMPL KAI TO MOVIE GENRE EINAI" + movie_genre);
+
+        return (List<Movie>) movieRepository.findByGenre(movie_genre);
+    }
+    
+    @Override
     public void deleteMovie(Long id) {
             movieRepository.deleteById(id);   
     }
-//
-//    @Override
-//    public void addToWatchlist(Long, Movie movie) {
-//        
-//        Optional<Movie> addedMovie = movieRepository.findById(movie.getId());
-//        Optional<User> activeUser = userRepository.findById(user.getId());
-//        user.setWatchListMovies(Arrays.asList(movie));
-//        
-//    }
 
     @Override
     public Movie addToWatchlist(Long movie_id , Long user_id) {
@@ -59,11 +58,10 @@ public class MovieServiceImpl implements MovieService {
         Optional<User> activeUser = userRepository.findById(user_id);    
         User unwrappedUser = UserServiceImpl.unwrapUser(activeUser, user_id);
         movie.getUsers().add(unwrappedUser);
-        System.out.println(movie.getTitle());
-        System.out.println(unwrappedUser.getName());
         return movieRepository.save(movie);
     }
-    
-   
 
-}
+    
+    
+       }
+    

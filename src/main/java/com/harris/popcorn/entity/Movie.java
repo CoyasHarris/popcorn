@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -28,7 +29,7 @@ import lombok.Setter;
 public class Movie {
     
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -64,9 +65,7 @@ public class Movie {
     @Column(length = 64 ,nullable = true )
     private String photos;
     
-    //WATCHLIST FUNCTIONALITY
-    @ManyToMany (mappedBy = "movie")
-    private List<User> users = new ArrayList<>();
+    
 
     
     @Transient
@@ -76,6 +75,9 @@ public class Movie {
     return "/movie-photos/" + id + "/" + photos;
     }
     
+    //WATCHLIST FUNCTIONALITY
+    @ManyToMany 
+    private List<User> users = new ArrayList<>();
     
     
     
