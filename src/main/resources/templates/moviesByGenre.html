@@ -23,18 +23,18 @@
                     </a> 
 
 
-
-                    <h1 style="background-color: black"
                 </div>
             </div>
         </nav>    
         <!--<div style="background-color: #03e9f4">-->
         <div class="container my-8 lead text-center" style="background-color: black" >
-   
-                        <div class="item" th:each="movie :${moviesByGenre}">
-                            <div>  <img th:src = "@{${movie.photosImagePath}}" width="200" height="280"></td>                        
+                    
+                        <div class="item" style ="padding-top:3% " th:each="movie :${moviesByGenre}">
+                            <div>  <a th:href = "@{/../movie/movieDetails/(id = ${movie.id})}"><img th:src = "@{${movie.photosImagePath}}" width="200" height="280"></a>
+                            
                             <div th:text="${movie.title}" class="fw-bold" style="color: coral" ></div>
                             <div th:text="${movie.rating}" class="fw-bold" style="color: coral"></div>
+                            <a role="button"  th:href="@{/../movie/movieDetails/(id = ${movie.id})}">Details</a>
 <!--                            <div th:text="${movie.genre}"></div>
                             <div th:text="${movie.summary}"></div>
                             <div text=""></div>-->

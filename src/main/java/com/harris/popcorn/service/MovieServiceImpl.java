@@ -42,8 +42,6 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> listByGenre(String movie_genre) {
-                System.out.println("EIMAI O SERVICE IMPL KAI TO MOVIE GENRE EINAI" + movie_genre);
-
         return (List<Movie>) movieRepository.findByGenre(movie_genre);
     }
     

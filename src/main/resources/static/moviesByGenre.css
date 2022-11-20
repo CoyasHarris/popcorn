@@ -14,7 +14,8 @@
   margin-bottom: 2%; /* (100-32*3)/2 */
   position: relative;
   flex-shrink: 3;
-  align-self: center ;
+  align-self: flex-start ;
 }
+
 
 

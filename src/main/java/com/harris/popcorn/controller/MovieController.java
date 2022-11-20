@@ -29,11 +29,10 @@ public class MovieController {
     @Autowired
     UserServiceImpl userServiceImpl;
 
-    @GetMapping
-    public String showHome() {
-        return "movieHome";
-    }
-
+//    @GetMapping
+//    public String showHome() {
+//        return "movieHome";
+//    }
     @GetMapping("/addmovieform")
     public String showForm(Model model, Movie movie) {
         model.addAttribute("movie", new Movie());
@@ -54,8 +53,15 @@ public class MovieController {
 
     }
 
+    @GetMapping("/movieDetails")
+    public String getMovie(@RequestParam(required = true) Long id, Model model) {
+        Movie movie = movieServiceImpl.getMovie(id);
+        model.addAttribute("movie", movie);
+        return "movie";
+    }
+
     @GetMapping("/movies")
-    public String getMovies(HttpServletRequest request, Model model, @RequestParam(required = false) Long id, User user) {
+    public String getMovies(HttpServletRequest request, Model model, User user) {
         if (request.isUserInRole("ROLE_ADMIN")) {
             model.addAttribute("movies", movieServiceImpl.listAll());
             return "moviesListAdmin";
@@ -119,7 +125,6 @@ public class MovieController {
     @GetMapping("/getByGenre")
     public String getMoviesByGenre(Model model, @RequestParam(required = false) String movie_genre) {
 
-        System.out.println("EIMAI O CONTROLLER KAI TO MOVIE GENRE EINAI" + movie_genre);
         movieServiceImpl.listByGenre(movie_genre);
         model.addAttribute("moviesByGenre", movieServiceImpl.listByGenre(movie_genre));
         return "moviesByGenre";

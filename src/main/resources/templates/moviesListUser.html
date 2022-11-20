@@ -76,7 +76,7 @@
                     </thead>
                     <tbody id="myTable">
                         <tr th:each="movie :${movies}">
-                            <td>  <img th:src = "@{${movie.photosImagePath}}" width="40" height="50"></td>                        
+                            <td> <a th:href = "@{/../movie/movieDetails/(id = ${movie.id})}"> <img th:src = "@{${movie.photosImagePath}}" width="50" height="60"></a></td>                        
                             <td th:text="${movie.title}"></td>
                             <td th:text="${movie.rating}"></td>
                             <td th:text="${movie.genre}"></td>
