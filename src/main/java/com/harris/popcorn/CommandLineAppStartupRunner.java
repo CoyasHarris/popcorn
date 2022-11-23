@@ -28,17 +28,17 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         //Instantiating and Saving to DB An Admin
-        Role role = roleServiceImpl.setRoleName("ADMIN");
-        User admin = new User();
-        admin.setAddress("adminaddress");
-        admin.setEmail("admin@admin.com");
-        admin.setName("Harris");
-        admin.setRoles(Arrays.asList(role));
-        admin.setPassword("1234");
-        userServiceImpl.saveUser(admin);
+//        Role role = roleServiceImpl.setRoleName("ADMIN");
+//        User admin = new User();
+//        admin.setAddress("adminaddress");
+//        admin.setEmail("admin@admin.com");
+//        admin.setName("Harris");
+//        admin.setRoles(Arrays.asList(role));
+//        admin.setPassword("1234");
+//        userServiceImpl.saveUser(admin);
         
         //Instantiating USER ROLE
-        roleServiceImpl.setRoleName("USER");
+//        roleServiceImpl.setRoleName("USER");
 
     }
 }

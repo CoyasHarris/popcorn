@@ -22,8 +22,8 @@
         <label>Address</label>
       </div> 
         <div class="user-box">
-        <input type="text" placeholder="E-mail" th:field="*{email}" required="required" 
-                       oninvalid="this.setCustomValidity('E-mail must be filled')"
+        <input type="email" placeholder="E-mail" th:field="*{email}" required="required"  
+               oninvalid="this.setCustomValidity('E-mail must be filled.Please check it is spelled correctly.')"
                        oninput="setCustomValidity('')">
         <label>E-mail</label>
       </div> 

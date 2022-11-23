@@ -19,4 +19,5 @@ public interface MovieService {
     void deleteMovie(Long id);
 
     public Movie addToWatchlist(Long user_id, Long movie_id);
+    
 }

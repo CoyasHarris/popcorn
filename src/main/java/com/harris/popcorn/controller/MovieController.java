@@ -2,6 +2,7 @@ package com.harris.popcorn.controller;
 
 import com.harris.popcorn.entity.Movie;
 import com.harris.popcorn.entity.User;
+import com.harris.popcorn.repository.MovieRepository;
 import com.harris.popcorn.service.MovieServiceImpl;
 import com.harris.popcorn.service.UserServiceImpl;
 import com.harris.util.FileUploadUtil;
@@ -25,6 +26,8 @@ public class MovieController {
 
     @Autowired
     MovieServiceImpl movieServiceImpl;
+    @Autowired
+    MovieRepository movieRepository;
 
     @Autowired
     UserServiceImpl userServiceImpl;
@@ -36,8 +39,6 @@ public class MovieController {
     @GetMapping("/addmovieform")
     public String showForm(Model model, Movie movie) {
         model.addAttribute("movie", new Movie());
-        System.out.println("ena ena ena TO MOVIE ID EINAI TO " + movie.getId());
-
         return "addmovieform";
     }
 
@@ -54,8 +55,13 @@ public class MovieController {
     }
 
     @GetMapping("/movieDetails")
-    public String getMovie(@RequestParam(required = true) Long id, Model model) {
+    public String getMovie(HttpServletRequest request, @RequestParam(required = true) Long id, Model model, User user) {
         Movie movie = movieServiceImpl.getMovie(id);
+
+        String activeUserMail = request.getUserPrincipal().getName();
+        User activeUser = userServiceImpl.findUserByEmail(activeUserMail);
+        int counter = movieRepository.numberOfMoviesAdded(activeUser.getId());
+        model.addAttribute("counter", counter);
         model.addAttribute("movie", movie);
         return "movie";
     }
@@ -68,8 +74,11 @@ public class MovieController {
         }
         String activeUserMail = request.getUserPrincipal().getName();
         User activeUser = userServiceImpl.findUserByEmail(activeUserMail);
+
+        int counter = movieRepository.numberOfMoviesAdded(activeUser.getId());
         model.addAttribute("activeUser", activeUser);
         model.addAttribute("movies", movieServiceImpl.listAll());
+        model.addAttribute("counter", counter);
 
         return "moviesListUser";
     }
@@ -109,13 +118,14 @@ public class MovieController {
     }
 
     @RequestMapping("/addtowatchlist")
-    public String addToWatchList(@RequestParam(required = true) Long movie_id, @RequestParam(required = true) Long user_id, RedirectAttributes rm) {
+    public String addToWatchList(@RequestParam(required = true) Long movie_id, @RequestParam(required = true) Long user_id, RedirectAttributes rm, Model model) {
 
         for (int i = 0; i < movieServiceImpl.getMovie(movie_id).getUsers().size(); i++) {
             if (movieServiceImpl.getMovie(movie_id).getUsers().get(i).getId().equals(user_id)) {
+                rm.addFlashAttribute("allreadyAdded", "Movie is Allready in your Watchlist");
+                return "redirect:/movie/movies";
             }
-            rm.addFlashAttribute("allreadyAdded", "Movie is Allready in your Watchlist");
-            return "redirect:/movie/movies";
+
         }
         movieServiceImpl.addToWatchlist(movie_id, user_id);
         rm.addFlashAttribute("addedToWatchlist", "Movie has been Added to your Watchlist");
@@ -123,9 +133,18 @@ public class MovieController {
     }
 
     @GetMapping("/getByGenre")
-    public String getMoviesByGenre(Model model, @RequestParam(required = false) String movie_genre) {
+    public String getMoviesByGenre(HttpServletRequest request, Model model, @RequestParam(required = false) String movie_genre) {
 
-        movieServiceImpl.listByGenre(movie_genre);
+        if (movieServiceImpl.listByGenre(movie_genre).isEmpty()) {
+            model.addAttribute("noMovieGenre", "Sorry, Nothing to show here.");
+
+        }
+        String activeUserMail = request.getUserPrincipal().getName();
+        User activeUser = userServiceImpl.findUserByEmail(activeUserMail);
+        int counter = movieRepository.numberOfMoviesAdded(activeUser.getId());
+        model.addAttribute("counter", counter);
+        model.addAttribute("activeUser", activeUser);
+        model.addAttribute("movieGenre",movie_genre);
         model.addAttribute("moviesByGenre", movieServiceImpl.listByGenre(movie_genre));
         return "moviesByGenre";
     }

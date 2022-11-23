@@ -74,7 +74,9 @@
                     <div>
 
                         <label>Photo: </label>
-                        <input type="file" name="image" accept="image/png, image/jpeg" />
+                        <input type="file" name="image" accept="image/png, image/jpeg" required="required" 
+                           oninvalid="this.setCustomValidity('Please choose a photo cover ')"
+                           oninput="setCustomValidity('')">
 
                     </div>
                     <h3 class="fw-bold">Summary</h3>
