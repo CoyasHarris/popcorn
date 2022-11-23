@@ -20,4 +20,6 @@ public interface MovieService {
 
     public Movie addToWatchlist(Long user_id, Long movie_id);
     
+    public Movie removeFromWatchlist(Long user_id, Long movie_id);
+    
 }

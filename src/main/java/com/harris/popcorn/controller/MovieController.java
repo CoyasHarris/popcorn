@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,7 +68,7 @@ public class MovieController {
     }
 
     @GetMapping("/movies")
-    public String getMovies(HttpServletRequest request, Model model, User user) {
+    public String getMovies(HttpServletRequest request, Model model) {
         if (request.isUserInRole("ROLE_ADMIN")) {
             model.addAttribute("movies", movieServiceImpl.listAll());
             return "moviesListAdmin";
@@ -117,6 +118,23 @@ public class MovieController {
         return "redirect:/movie/movies";
     }
 
+    @GetMapping("/getByGenre")
+    public String getMoviesByGenre(HttpServletRequest request, Model model, @RequestParam(required = false) String movie_genre) {
+
+        if (movieServiceImpl.listByGenre(movie_genre).isEmpty()) {
+            model.addAttribute("noMovieGenre", "Sorry, Nothing to show here.");
+
+        }
+        String activeUserMail = request.getUserPrincipal().getName();
+        User activeUser = userServiceImpl.findUserByEmail(activeUserMail);
+        int counter = movieRepository.numberOfMoviesAdded(activeUser.getId());
+        model.addAttribute("counter", counter);
+        model.addAttribute("activeUser", activeUser);
+        model.addAttribute("movieGenre", movie_genre);
+        model.addAttribute("moviesByGenre", movieServiceImpl.listByGenre(movie_genre));
+        return "moviesByGenre";
+    }
+
     @RequestMapping("/addtowatchlist")
     public String addToWatchList(@RequestParam(required = true) Long movie_id, @RequestParam(required = true) Long user_id, RedirectAttributes rm, Model model) {
 
@@ -132,20 +150,25 @@ public class MovieController {
         return "redirect:/movie/movies";
     }
 
-    @GetMapping("/getByGenre")
-    public String getMoviesByGenre(HttpServletRequest request, Model model, @RequestParam(required = false) String movie_genre) {
-
-        if (movieServiceImpl.listByGenre(movie_genre).isEmpty()) {
-            model.addAttribute("noMovieGenre", "Sorry, Nothing to show here.");
-
-        }
+    @RequestMapping("/removefromwatchlist")
+    public String removeFromWatchlist(HttpServletRequest request,@RequestParam(required = true) Long movie_id, @RequestParam(required = true) Long user_id, RedirectAttributes rm) {
         String activeUserMail = request.getUserPrincipal().getName();
         User activeUser = userServiceImpl.findUserByEmail(activeUserMail);
-        int counter = movieRepository.numberOfMoviesAdded(activeUser.getId());
-        model.addAttribute("counter", counter);
-        model.addAttribute("activeUser", activeUser);
-        model.addAttribute("movieGenre",movie_genre);
-        model.addAttribute("moviesByGenre", movieServiceImpl.listByGenre(movie_genre));
-        return "moviesByGenre";
+        movieServiceImpl.removeFromWatchlist(activeUser.getId(), movie_id);
+        rm.addAttribute("users_id",user_id);
+        return "redirect:/movie/watchlist";
     }
+
+    
+    
+    @GetMapping("/watchlist")
+    public String getWatchlist(HttpServletRequest request,@RequestParam(required = true) Long users_id, Model model) {
+        String activeUserMail = request.getUserPrincipal().getName();
+        User activeUser = userServiceImpl.findUserByEmail(activeUserMail);
+        
+        model.addAttribute("userWatchlist", movieRepository.findMoviesByUsersId(users_id));
+        model.addAttribute("activeUser",activeUser);
+        return "watchlist";
+    }
+
 }

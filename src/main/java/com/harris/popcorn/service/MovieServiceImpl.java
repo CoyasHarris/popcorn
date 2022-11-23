@@ -59,6 +59,15 @@ public class MovieServiceImpl implements MovieService {
         return movieRepository.save(movie);
     }
 
+    @Override
+    public Movie removeFromWatchlist(Long user_id, Long movie_id) {
+        Movie movie = getMovie(movie_id);
+        Optional<User> activeUser = userRepository.findById(user_id);    
+        User unwrappedUser = UserServiceImpl.unwrapUser(activeUser, user_id);
+        movie.getUsers().remove(unwrappedUser);
+        return movieRepository.save(movie);
+    }
+
     
     
        }

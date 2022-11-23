@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" 
+              rel="stylesheet" 
+              integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" 
+              crossorigin="anonymous">
+        <title>My Watchlist</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body class="bg-image"th:style="'background-size:cover ;background-image: url(/cinema-lighter.jpg)'">
+              <nav class="navbar ">
+            <div class="container-lg">
+                <div class ="btn-group ">
+
+                    <a class="btn btn-primary btn-lg" th:href="@{/../movie/movies}">
+                        Home</a>
+                    <a class="btn btn-danger btn-lg"  th:href="@{/logout}">Logout</a>
+
+                    <a href="#sidebarend" class=" btn btn-outline-info btn-lg" data-bs-toggle="offcanvas" role="button" aria-controls="sidebar">
+                        User Details
+                    </a> 
+
+
+
+
+                </div>
+            </div>
+        </nav>  
+        
+        
+        <div>
+            userWatchlist
+            
+            <table class="container-lg my-5 lead text-center table table-dark table-striped"> 
+                    <thead class='table-dark'>
+                        <tr>
+                            <th>Cover</th>
+                            <th>Title</th>
+                         
+                            <th>Price</th>
+                           
+                            <th>Delete</th>-->
+
+                        </tr>
+                    </thead>
+                    <tbody id="myTable">
+                        <tr th:each="movie :${userWatchlist}">
+                            <td> <a th:href = "@{/../movie/movieDetails/(id = ${movie.id})}"> <img th:src = "@{${movie.photosImagePath}}" width="80" height="100"></a></td>                        
+                            <td th:text="${movie.title}"></td>
+                            <td th:text="${movie.title}"></td>
+                             <div th:object = "${activeUser}" class="box">
+                            <td> <a role="button" class="btn btn-danger btn-sm" th:href = "@{/../movie/removefromwatchlist/(movie_id=${movie.id},user_id=${activeUser.id})}">Remove</a> </td>
+                            <!--th:href="@{addtowatchlist/(movie_id=${movie.id},user_id=${activeUser.id})}"-->
+                            <td text=""></td>
+                   
+
+
+                        </tr>
+                        </tbody>
+                </table>
+            
+            
+            
+        </div>
+    </body>
+</html>

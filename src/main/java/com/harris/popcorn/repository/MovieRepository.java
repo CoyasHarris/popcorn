@@ -15,6 +15,10 @@ public interface MovieRepository extends CrudRepository<Movie, Long>{
     
     List<Movie> findByGenre(String genre);
     
+ 
+    List<Movie> findMoviesByUsersId(Long users_id);
+    
+    
     
     @Query(
      value = "SELECT count(movie_id) FROM popcorn.movie_users WHERE users_id=?1", 
